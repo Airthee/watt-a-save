@@ -3,7 +3,7 @@ const int BUTTON_PIN = 2;
 const int ANALOG_CURRENT_PIN = A0;
 const int BITRATE = 9600; // bits per second
 const int BASE_VOLTAGE = 230; // in Volt
-const float KWH_PRICE = 1000; // 17.65; // centimes d'€
+const float KWH_PRICE = 17.65; // centimes d'€
 
 // Global variables
 int buttonValue = LOW;
