@@ -1,5 +1,6 @@
 // CONSTANTS
 const int BUTTON_PIN = 2;
+const int LED_PIN = 13;
 const int ANALOG_CURRENT_PIN = A0;
 const int BITRATE = 9600; // bits per second
 const int BASE_VOLTAGE = 230; // in Volt
@@ -18,15 +19,18 @@ void setup() {
   
   // declare pins
   pinMode(BUTTON_PIN, INPUT);
+  pinMode(LED_PIN, OUTPUT);
 }
 
 // the loop routine runs over and over again forever:
 void loop() {
+  digitalWrite(LED_PIN, HIGH);
+  
   // Lecture du capteur de courant
   currentSensorValue = analogRead(ANALOG_CURRENT_PIN);
   
   // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5A):
-  float current = currentSensorValue * (1.0 / 1023.0) * 5;
+  float current = currentSensorValue * (5.0 / 1023.0);
   
   // Conversion en watt
   float watt =  current * BASE_VOLTAGE;
@@ -65,5 +69,7 @@ void loop() {
   // Si la connexion avec le serveur fonctionne
     // Envoi des données au serveur
   
+  Serial.println("");
+  digitalWrite(LED_PIN, LOW);
   delay(1000);
 }
