@@ -4,11 +4,12 @@ const int ANALOG_CURRENT_PIN = A0;
 const int BITRATE = 9600; // bits per second
 const int BASE_VOLTAGE = 230; // in Volt
 const int LOOP_DELAY = 1000; // in ms
+const float KWH_PRICE = 17.65; // centimes d'€
 
 // Global variables
 int buttonValue = 0;
 int currentSensorValue = 0;
-int totalPrice = 0;
+int totalPrice = 0; // centimes d'€
 
 // the setup routine runs once when you press reset:
 void setup() {
@@ -41,9 +42,10 @@ void loop() {
       totalPrice = 0;
   }
   else {
-    // totalPrice += watt * ();
-    // prix kw/h
+    totalPrice += watt * (KWH_PRICE / 3600);
   }
+  Serial.print(totalPrice);
+  Serial.println(" centimes d'€");
   
   // Si la connexion avec le serveur fonctionne
     // Envoi des données au serveur
