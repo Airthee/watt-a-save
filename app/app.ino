@@ -3,11 +3,10 @@ const int BUTTON_PIN = 2;
 const int ANALOG_CURRENT_PIN = A0;
 const int BITRATE = 9600; // bits per second
 const int BASE_VOLTAGE = 230; // in Volt
-const int LOOP_DELAY = 1000; // in ms
-const float KWH_PRICE = 17.65; // centimes d'€
+const float KWH_PRICE = 1000; // 17.65; // centimes d'€
 
 // Global variables
-int buttonValue = 0;
+int buttonValue = LOW;
 int currentSensorValue = 0;
 int totalPrice = 0; // centimes d'€
 
@@ -38,14 +37,15 @@ void loop() {
   // Mise à jour et affichage du coût toutes les X secondes
   // Si le bouton de réinitialisation du coût est actionné, on remet à 0
   buttonValue = digitalRead(BUTTON_PIN);
-  if (buttonValue == LOW) {
+  if (buttonValue == HIGH) {
       totalPrice = 0;
+      Serial.println("Réinitialisation du prix");
   }
   else {
-    totalPrice += watt * (KWH_PRICE / 3600);
+    totalPrice += (watt * (KWH_PRICE / (3600))) / 100; // centimes par watt seconde
   }
   Serial.print(totalPrice);
-  Serial.println(" centimes d'€");
+  Serial.println(" centimes d'euro");
   
   // Si la connexion avec le serveur fonctionne
     // Envoi des données au serveur
