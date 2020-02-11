@@ -9,13 +9,13 @@ const int ANALOG_CURRENT_PIN = A0;
 const int BITRATE = 9600; // bits per second
 const int BASE_VOLTAGE = 230; // in Volt
 const float KWH_PRICE = 17.65; // centimes d'€
-const int BENCH_ID = 1;
+const int BENCH_ID = 2;
 const String ROUTE = "/api/measures";
 
-const char ssid[] = "Lecoussin";    // Network SSID (name)
-const char pass[] = "rapedefromage";    // Network password (use for WPA, or use as key for WEP)
+const char ssid[] = "Samsung S10e";    // Network SSID (name)
+const char pass[] = "nonnonnon";    // Network password (use for WPA, or use as key for WEP)
 const char server[] = "benoitjaouen.fr";
-const int port = 8000;
+const int port = 443;
 
 // Global variables
 int buttonValue = LOW;
@@ -24,7 +24,7 @@ float totalWH = 0; // centimes d'€
 float price;
 
 int status = WL_IDLE_STATUS;
-WiFiClient client;
+WiFiSSLClient client;
 HttpClient http_client = HttpClient(client, server, port);
 
 // the setup routine runs once when you press reset:
